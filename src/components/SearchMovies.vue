@@ -32,7 +32,7 @@
       </div>
     </div>
 
-    <!--     <pre> {{movies}} </pre> -->
+ 
     
 
     <footer class="bg-light text-center text-lg-start"> 
@@ -73,9 +73,6 @@
     data () {
       return {
         url : 'https://web-development-moviesapi.azurewebsites.net/api/movies',
-        moviesOne : [],
-        moviesTwo : [],
-        moviesThree : [],
         movies: [],
         numRow : 0,
         busquedaPorTitulo : ""
@@ -86,11 +83,9 @@
 
           try {
             let {data: respuesta} = await this.axios(this.url)
-            var moviesResults = respuesta.results
-            this.moviesOne = moviesResults.slice(0,5)
-            this.moviesTwo = moviesResults.slice(5,10)
-            this.moviesThree = moviesResults.slice(10,15)
-            this.movies = this.moviesOne.concat(this.moviesTwo).concat(this.moviesThree)
+            this.movies = respuesta.results
+            
+
           }
           catch(error) {
              console.error('Error en Axios: ', error)
@@ -101,9 +96,6 @@
         return "https://image.tmdb.org/t/p/original" + path
       },
 
-      calcularIndex(index, index2) {
-        return ((index - 1) * 4) + index2 
-      },
 
       getStyle(){
         return {}
@@ -112,8 +104,14 @@
     computed: {
       peliculasFiltradas() {
             return this.movies.filter((movie) => {
-            let registroTitulo = `${movie.title}`
-            return registroTitulo.toLowerCase() == this.busquedaPorTitulo.toLowerCase()
+              if(!this.busquedaPorTitulo.length) {
+                return true
+              }
+              else {
+                let registroTitulo = `${movie.title}`
+                return registroTitulo.toLowerCase().startsWith(this.busquedaPorTitulo.toLowerCase())
+              }
+            
             })
           }
     }
