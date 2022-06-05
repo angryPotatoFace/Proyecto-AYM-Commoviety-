@@ -1,16 +1,31 @@
 <template>
   <div id="app">
-    <SearchMovies/>
+    <SearchMovies v-if='showDetails' @showDetails='setValues($event)' />
+    <DetailsMovie v-else @showList='showDetails=$event' :movie='this.movie' /> 
   </div>
 </template>
 
 <script>
 import SearchMovies from './components/SearchMovies.vue'
+import DetailsMovie from  './components/DetailsMovie.vue'
 
 export default {
   name: 'App',
   components: {
-    SearchMovies
+    SearchMovies,
+    DetailsMovie
+  },
+  data () {
+    return {
+      showDetails: true,
+      movie: {}
+    }
+  },
+  methods: {
+    setValues( event){
+      this.showDetails = event.showDetails;
+      this.movie = event.movie;
+    }
   }
 }
 </script>

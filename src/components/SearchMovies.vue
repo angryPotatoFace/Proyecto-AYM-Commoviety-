@@ -23,7 +23,7 @@
             <img class="card-img-top" :src=traerUrl(movie.poster_path) alt="Card image">
             <div class="card-body">
               <h4 class="card-title" style="color:#F48660">{{movie.title}}</h4>
-              <a href="#"  class="btn btn-danger" style="background:#F48660">Ver detalles</a>
+              <button @click="showDetails(index)"  class="btn btn-danger" style="background:#F48660">Ver detalles</button>
             </div>
           </div>
         </div> 
@@ -84,8 +84,6 @@
           try {
             let {data: respuesta} = await this.axios(this.url)
             this.movies = respuesta.results
-            
-
           }
           catch(error) {
              console.error('Error en Axios: ', error)
@@ -99,7 +97,13 @@
 
       getStyle(){
         return {}
+      },
+
+      showDetails(event){
+        const obj = { showDetails:false, movie: this.movies[event]};
+        this.$emit('showDetails', obj);
       }
+
     },
     computed: {
       peliculasFiltradas() {
