@@ -38,5 +38,11 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 40px;
+  
+}
+
+body {
+  background-color: rgb(247, 247, 247) !important;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif !important; 
 }
 </style>
