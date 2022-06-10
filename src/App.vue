@@ -1,19 +1,22 @@
 <template>
   <div id="app">
-    <SearchMovies v-if='showDetails' @showDetails='setValues($event)' />
-    <DetailsMovie v-else @showList='showDetails=$event' :movie='this.movie' /> 
+    <SearchMovies hidden v-if='showDetails' @showDetails='setValues($event)' />
+    <DetailsMovie hidden v-else @showList='showDetails=$event' :movie='this.movie' /> 
+    <Registration />
   </div>
 </template>
 
 <script>
 import SearchMovies from './components/SearchMovies.vue'
 import DetailsMovie from  './components/DetailsMovie.vue'
+import Registration from './components/Registration.vue'
 
 export default {
   name: 'App',
   components: {
     SearchMovies,
-    DetailsMovie
+    DetailsMovie,
+    Registration
   },
   data () {
     return {

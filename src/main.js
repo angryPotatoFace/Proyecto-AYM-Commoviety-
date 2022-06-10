@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './bootstrap'
 import './axios'
 import { router } from './router'
+import './form'
 
 Vue.config.productionTip = false
 
