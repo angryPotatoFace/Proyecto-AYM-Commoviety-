@@ -1,10 +1,9 @@
 <template>
   <div id="app">
-    <SearchMovies hidden v-if='showDetails' @showDetails='setValues($event)' />
-    <DetailsMovie hidden v-else @showList='showDetails=$event' :movie='this.movie' /> 
+    <SearchMovies v-if='showList' @showLogin='showLogin=$event' @showDetails='setValues($event)' />
+    <DetailsMovie v-if='showDetails' @showList='showList=$event' :movie='this.movie' /> 
     <Registration v-if='showRegistration' @showLogin='showLogin=$event' />
-    <Login v-if='showLogin' @showRegistration='showRegistration=$event' />
-    
+    <Login v-if='showLogin' @showRegistration='showRegistration=$event' @showList='showList=$event' />
   </div>
 </template>
 
@@ -24,14 +23,15 @@ export default {
   },
   data () {
     return {
-      showDetails: true,
+      showDetails: false,
       showRegistration: true,
       showLogin: false,
+      showList: false,
       movie: {}
     }
   },
   methods: {
-    setValues( event){
+    setValues(event){
       this.showDetails = event.showDetails;
       this.movie = event.movie;
     }
@@ -45,9 +45,7 @@ export default {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 40px;
-  
+  color: #2c3e50; 
 }
 
 body {

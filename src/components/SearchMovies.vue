@@ -115,6 +115,8 @@ export default {
   name: "src-components-movies",
   props: [],
   mounted() {
+    this.$emit("showLogin", false);
+     this.$emit("showDetails", false);
     this.getPostsAxios();
   },
   updated() {
@@ -156,7 +158,7 @@ export default {
     },
 
     showDetails(event) {
-      const obj = { showDetails: false, movie: this.movies[event] };
+      const obj = { showDetails: true, movie: this.movies[event] };
       this.$emit("showDetails", obj);
     },
   },

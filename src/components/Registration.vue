@@ -69,6 +69,7 @@
                   </validate>
                   <br>
               </div>
+              <br>
               <div class="d-flex justify-content-between">
                   <!--CAMPO USUARIO -->
                   <validate tag="div">  
@@ -130,6 +131,7 @@
                   </validate>
                   <br>
             </div>
+            <br>
             <div class="d-flex justify-content-between">
                   <!--CAMPO CONTRASEÑA -->
                   <validate tag="div">  

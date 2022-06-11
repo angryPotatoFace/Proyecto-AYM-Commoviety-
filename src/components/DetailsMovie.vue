@@ -2,7 +2,7 @@
 
   <section class="src-components-show-movie">
     
-    <div class="container">
+    <div class="container mt-5">
       <div class="jumbotron">
       <div class="row">
         <div class="card col-4" style="width:100px">
@@ -32,7 +32,9 @@
 export default {
   name: "src-components-show-movie",
   props: ["movie"],
-  mounted() {},
+  mounted() {
+    this.$emit("showList", false);
+  },
   data() {
     return {};
   },
