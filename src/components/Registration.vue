@@ -159,7 +159,7 @@
                   <br>
 
                   <!--CAMPO REPETIR CONTRASEÑA -->
-                  <validate tag="div" :custom="{customValidator: customValidator}">  
+                  <validate tag="div" >  
                     <label for="repeatContrasenia">Repetir Contraseña</label>
                     <input 
                       type="password" 
@@ -170,7 +170,7 @@
                       class="form-control"
                       required 
                       :style="{width: '27rem', }"
-                      :son-iguales="formData.contrasenia"
+                      :son-iguales="formData.contrasenia" 
                       />
 
                       <field-messages name="repeatContrasenia" show="$dirty">
@@ -195,7 +195,7 @@
                 type="submit">
                                   Registrarse
         </button> 
-        <p class="mt-3" :style="{paddingLeft: '33rem'}">¿Ya tienes cuenta? <a style="color:#F48660" href='/searchMovies'>Inicia sesion</a></p>
+        <p class="mt-3" :style="{paddingLeft: '33rem'}">¿Ya tienes cuenta? <a style="color:#F48660" href='#' @click="goToLogin()">Inicia sesion</a></p>
       </vue-form>
 
 
@@ -209,31 +209,60 @@
     // eslint-disable-next-line vue/multi-word-component-names
     name: 'registration',
     props: [],
-    mounted () {
-
+    async mounted () {
+      this.$emit("showLogin", false);
+      let {data: usuarios} = await this.axios(this.url)
+      this.usuarios = usuarios
     },
     data () {
       return {
         formstate: {},
-        formData: {
+        formData: this.getInitialData(),
+        url: "https://627da2b8dd8aafd4fa80dcd3.mockapi.io/personas",
+        datoMaxLength: 20,
+        datoMinLength: 3,
+        usuarios : []
+      }
+    },
+    methods: {
+      getInitialData() {
+        return {
           nombre: "",
           apellido: "",
           usuario: "",
           email: "",
           contrasenia: "",
           repeatContrasenia: ""
-        },
-        datoMaxLength: 20,
-        datoMinLength: 3
+        }
+      },
+      async enviar() {
+        let usuario = {...this.formData}
+        if(this.noExiste(usuario.usuario)) {
+          delete usuario.repeatContrasenia
+          await this.axios.post(this.url, usuario, {'content-type':'application/json'})
+          
+          
+
+        }
+        
+        let {data: usuarios} = await this.axios(this.url)
+        this.usuarios = usuarios
+        this.formData = this.getInitialData()
+        this.formstate._reset()
+        
+      },
+      noExiste(nombreUsuario) {
+        return this.usuarios.filter(usuario => usuario.usuario == nombreUsuario).length == 0
+      },
+
+      goToLogin() {
+        this.$emit("showLogin", true);
+
       }
-    },
-    methods: {
       
     },
     computed: {
-      customValidator: function () {
-        return this.formData.apellido === this.formData.repeatContrasenia;
-      }
+
     }
 }
 

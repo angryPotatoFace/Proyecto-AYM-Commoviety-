@@ -7,7 +7,7 @@ var options = {
             return !value.includes(' ')
         },
         'son-iguales': function(value, dato){
-            return value === dato
+            return value == dato
         }
     }
 }
