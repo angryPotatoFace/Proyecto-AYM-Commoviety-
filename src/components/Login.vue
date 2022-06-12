@@ -102,6 +102,7 @@
     props: [],
     async mounted () {
       this.$emit("showRegistration", false);
+      this.$emit("showLogout", false);
       let {data: usuarios} = await this.axios(this.url)
       this.usuarios = usuarios
       console.log(this.usuarios)

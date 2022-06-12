@@ -2,7 +2,8 @@
   <div id="app">
     <SearchMovies
      v-if='showList' 
-     @showLogin='showLogin=$event' @showDetails='setValues($event)' 
+     @showLogin='showLogin=$event' @showDetails='setValues($event)'
+     @showLogout='showLogout=$event'
     />
     <DetailsMovie 
       v-if='showDetails' 
@@ -13,11 +14,15 @@
       v-if='showRegistration' @showLogin='showLogin=$event' 
     />
     <Login 
-      v-if='showLogin' @showRegistration='showRegistration=$event' @showList='showList=$event' 
+      v-if='showLogin' 
+      @showRegistration='showRegistration=$event' 
+      @showList='showList=$event'
+      @showLogout='showLogout=$event'
     />
     <Logout 
       v-if='showLogout' 
       @showLogin='showLogin=$event'
+      @showList='showList=$event'
     />
   </div>
 </template>
