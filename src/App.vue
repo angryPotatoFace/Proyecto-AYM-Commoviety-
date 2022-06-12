@@ -4,6 +4,7 @@
     <DetailsMovie v-if='showDetails' @showList='showList=$event' :movie='this.movie' /> 
     <Registration v-if='showRegistration' @showLogin='showLogin=$event' />
     <Login v-if='showLogin' @showRegistration='showRegistration=$event' @showList='showList=$event' />
+    <Logout v-if='showLogout' @showRegistration='showRegistration=$event' @showList='showList=$event' />
   </div>
 </template>
 
@@ -12,6 +13,7 @@ import SearchMovies from './components/SearchMovies.vue'
 import DetailsMovie from  './components/DetailsMovie.vue'
 import Registration from './components/Registration.vue'
 import Login from './components/Login.vue'
+import Logout from './components/Logout.vue'
 
 export default {
   name: 'App',
@@ -19,7 +21,8 @@ export default {
     SearchMovies,
     DetailsMovie,
     Registration,
-    Login
+    Login,
+    Logout
   },
   data () {
     return {
@@ -27,6 +30,7 @@ export default {
       showRegistration: true,
       showLogin: false,
       showList: false,
+      showLogout: false,
       movie: {}
     }
   },
