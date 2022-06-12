@@ -1,10 +1,24 @@
 <template>
   <div id="app">
-    <SearchMovies v-if='showList' @showLogin='showLogin=$event' @showDetails='setValues($event)' />
-    <DetailsMovie v-if='showDetails' @showList='showList=$event' :movie='this.movie' /> 
-    <Registration v-if='showRegistration' @showLogin='showLogin=$event' />
-    <Login v-if='showLogin' @showRegistration='showRegistration=$event' @showList='showList=$event' />
-    <Logout v-if='showLogout' @showRegistration='showRegistration=$event' @showList='showList=$event' />
+    <SearchMovies
+     v-if='showList' 
+     @showLogin='showLogin=$event' @showDetails='setValues($event)' 
+    />
+    <DetailsMovie 
+      v-if='showDetails' 
+      @showList='showList=$event' 
+      :movie='this.movie' 
+    /> 
+    <Registration 
+      v-if='showRegistration' @showLogin='showLogin=$event' 
+    />
+    <Login 
+      v-if='showLogin' @showRegistration='showRegistration=$event' @showList='showList=$event' 
+    />
+    <Logout 
+      v-if='showLogout' 
+      @showLogin='showLogin=$event'
+    />
   </div>
 </template>
 

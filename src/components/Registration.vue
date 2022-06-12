@@ -251,8 +251,6 @@
         >
       </p>
     </vue-form>
-
-    <pre>{{ formstate }}</pre>
   </section>
 </template>
 

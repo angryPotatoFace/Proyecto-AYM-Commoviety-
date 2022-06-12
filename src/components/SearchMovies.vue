@@ -22,7 +22,11 @@
             placeholder="Ingresar el titulo de la pelicula..."
           />
         </div>
-          <button class="btn btn-danger btn-sm" style="background: #f46060">Cerrar sesión</button>
+          <a 
+            class="btn btn-danger btn-sm" style="background: #f46060  @click=goToLogout()" 
+            href="#">
+              Cerrar sesión
+          </a>
         </div>
       
     </div>
@@ -119,10 +123,11 @@ export default {
   mounted() {
     this.$emit("showLogin", false);
     this.$emit("showDetails", false);
-    this.getPostsAxios();
+    /* this.getPostsAxios(); */
+    this.$emit("showLogout", false)
   },
   updated() {
-    this.getPostsAxios();
+    /* this.getPostsAxios(); */
   },
 
   data() {
@@ -160,9 +165,17 @@ export default {
     },
 
     showDetails(event) {
-      const obj = { showDetails: true, movie: this.movies[event] };
+      const obj = { 
+        showDetails: true, 
+        movie: this.movies[event] 
+      };
       this.$emit("showDetails", obj);
     },
+
+    goToLogout() {
+      this.$emit("showLogout", true)
+      console.log("HOla")
+    }
   },
   computed: {
     peliculasFiltradas() {
