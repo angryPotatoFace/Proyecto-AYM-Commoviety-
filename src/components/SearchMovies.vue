@@ -1,27 +1,35 @@
 <template>
   <section class="src-components-movies">
+    <a
+      class="btn btn-danger mt-2 mb-2"
+      :style="{background: '#f46060', 'margin-left': '1600px'}"
+      @click="goToLogout()"
+      href="#"
+    >
+      Cerrar sesión
+    </a>
     <div class="borde-buscador">
-      <div>
-      <div class="input-icons">
-        <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        fill="currentColor"
-        class="bi bi-search"
-        viewBox="0 0 16 16"
-      >
-      <path
-          d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
-      />
-      </svg>
-        <input
-        type="text"
-        class="input-field"
-        v-model="busquedaPorTitulo"
-        placeholder="Ingresar el titulo de la pelicula..."
-      />
-      </div>
+      <div class="row">
+        <div class="input-icons">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-search"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
+            />
+          </svg>
+          <input
+            type="text"
+            class="input-field"
+            v-model="busquedaPorTitulo"
+            placeholder="Ingresar el titulo de la pelicula..."
+          />
+        </div>
       </div>
     </div>
     <br />
@@ -116,8 +124,9 @@ export default {
   props: [],
   mounted() {
     this.$emit("showLogin", false);
-     this.$emit("showDetails", false);
+    this.$emit("showDetails", false);
     this.getPostsAxios();
+    this.$emit("showLogout", false);
   },
   updated() {
     this.getPostsAxios();
@@ -125,7 +134,7 @@ export default {
 
   data() {
     return {
-      url: "https://web-development-moviesapi.azurewebsites.net/api/movies",
+      url: "https://api.themoviedb.org/3/movie/popular?api_key=7be72508776961f3948639fbd796bccd",
       movies: [],
       numRow: 0,
       busquedaPorTitulo: "",
@@ -158,8 +167,15 @@ export default {
     },
 
     showDetails(event) {
-      const obj = { showDetails: true, movie: this.movies[event] };
+      const obj = {
+        showDetails: true,
+        movie: this.movies[event],
+      };
       this.$emit("showDetails", obj);
+    },
+
+    goToLogout() {
+      this.$emit("showLogout", true);
     },
   },
   computed: {
@@ -220,9 +236,9 @@ h1 {
 
 .input-field {
   width: 100%;
-  padding-left:40px;
-  padding-top:5px;
-  padding-bottom:5px;
+  padding-left: 40px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   border-radius: 20px;
   border: none;
 }
